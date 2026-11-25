@@ -22,10 +22,18 @@ import (
 func main() {
 	arg := os.Args[1]
 
-	feet, _ := strconv.ParseFloat(arg, 64)
+	const bitSize = 64
 
-	meters := feet * 0.3048
-	yards := feet * 0.3333
+	feet, _ := strconv.ParseFloat(arg, bitSize)
+
+	const (
+		Feet  = 1
+		Meter = Feet * 0.3048
+		Yard  = Feet * 0.3333
+	)
+
+	meters := Meter * feet
+	yards := Yard * feet
 
 	fmt.Printf("%g feet is %g meters.\n", feet, meters)
 	fmt.Printf("%g feet is %g yards.\n", feet, yards)
