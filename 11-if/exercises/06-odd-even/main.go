@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Odd or Even
 //
@@ -37,4 +43,28 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	args := os.Args
+
+	if len(args) < 2 {
+		fmt.Println("Pick a number")
+		return
+	}
+
+	n, err := strconv.Atoi(args[1])
+
+	if err != nil {
+		fmt.Printf("%q is not a number\n", args[1])
+		return
+	}
+
+	isEven := n%2 == 0
+	isDivisibleByEight := n%8 == 0
+
+	if isEven && isDivisibleByEight {
+		fmt.Printf("%d is an even number and it's divisible by %d\n", n, 8)
+	} else if isEven {
+		fmt.Printf("%d is an even number\n", n)
+	} else {
+		fmt.Printf("%d is an odd number\n", n)
+	}
 }

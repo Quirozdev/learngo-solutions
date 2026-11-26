@@ -8,6 +8,13 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strings"
+	"time"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Days in a Month
 //
@@ -88,4 +95,49 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	args := os.Args
+
+	if len(args) < 2 {
+		fmt.Println("Give me a month name")
+		return
+	}
+
+	month := strings.ToLower(args[1])
+
+	if month != "january" && month != "february" && month != "march" && month != "april" && month != "may" && month != "june" && month != "july" && month != "august" && month != "september" && month != "october" && month != "november" && month != "december" {
+		fmt.Printf("%q is not a month.\n", month)
+		return
+	}
+
+	currYear := time.Now().Year()
+
+	isLeapYear := currYear%400 == 0 || (currYear%100 != 0 && currYear%4 == 0)
+
+	if month == "january" {
+		fmt.Printf("%q has 31 days.\n", args[1])
+	} else if month == "february" && isLeapYear {
+		fmt.Printf("%q has 29 days.\n", args[1])
+	} else if month == "february" && !isLeapYear {
+		fmt.Printf("%q has 28 days.\n", args[1])
+	} else if month == "march" {
+		fmt.Printf("%q has 31 days.\n", args[1])
+	} else if month == "april" {
+		fmt.Printf("%q has 30 days.\n", args[1])
+	} else if month == "may" {
+		fmt.Printf("%q has 31 days.\n", args[1])
+	} else if month == "june" {
+		fmt.Printf("%q has 30 days.\n", args[1])
+	} else if month == "july" {
+		fmt.Printf("%q has 31 days.\n", args[1])
+	} else if month == "august" {
+		fmt.Printf("%q has 31 days.\n", args[1])
+	} else if month == "september" {
+		fmt.Printf("%q has 30 days.\n", args[1])
+	} else if month == "october" {
+		fmt.Printf("%q has 31 days.\n", args[1])
+	} else if month == "november" {
+		fmt.Printf("%q has 30 days.\n", args[1])
+	} else if month == "december" {
+		fmt.Printf("%q has 31 days.\n", args[1])
+	}
 }

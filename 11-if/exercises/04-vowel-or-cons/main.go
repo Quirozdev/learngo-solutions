@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Vowel or Consonant
 //
@@ -50,4 +56,24 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	args := os.Args
+
+	if len(args) < 2 || len(args[1]) > 1 {
+		fmt.Println("Give me a letter")
+		return
+	}
+
+	letter := args[1]
+
+	isVowel := strings.ContainsAny(letter, "aeiou")
+
+	isSemiVowel := letter == "y" || letter == "w"
+
+	if isVowel {
+		fmt.Printf("%q is a vowel.\n", letter)
+	} else if isSemiVowel {
+		fmt.Printf("%q is sometimes a vowel, sometimes not.\n", letter)
+	} else {
+		fmt.Printf("%q is a consonant.\n", letter)
+	}
 }
