@@ -8,6 +8,12 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Sum up to N
 //
@@ -36,4 +42,42 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	args := os.Args
+
+	if len(args) < 3 {
+		fmt.Printf("Please provide min and max.\n")
+		return
+	}
+
+	min, err := strconv.Atoi(args[1])
+
+	if err != nil {
+		fmt.Printf("%q is not a number.\n", min)
+		return
+	}
+
+	max, err := strconv.Atoi(args[2])
+
+	if err != nil {
+		fmt.Printf("%q is not a number.\n", max)
+		return
+	}
+
+	if min >= max {
+		fmt.Printf("max (%d) must be larger than min (%d)\n", max, min)
+		return
+	}
+
+	sum := 0
+
+	for i := min; i <= max; i++ {
+		sum += i
+		fmt.Print(i)
+
+		if i < max {
+			fmt.Printf(" + ")
+		}
+	}
+
+	fmt.Printf(" = %d\n", sum)
 }

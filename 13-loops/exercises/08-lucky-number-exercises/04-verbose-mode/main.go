@@ -8,6 +8,13 @@
 
 package main
 
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Verbose Mode
 //
@@ -27,4 +34,51 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+
+	const maxTurns = 5
+
+	args := os.Args
+
+	if len(args) < 2 {
+		fmt.Println("Please provide a value")
+		return
+	}
+
+	var guess int
+	var err error
+	var option string
+
+	if len(args) > 2 {
+		option = args[1]
+		guess, err = strconv.Atoi(args[2])
+
+	} else {
+		guess, err = strconv.Atoi(args[1])
+	}
+
+	if err != nil || guess <= 0 {
+		fmt.Println("Please provide a valid integer value larger than 0")
+		return
+	}
+
+	for turn := 1; turn <= maxTurns; turn++ {
+		cpuguess := rand.Intn(guess) + 1
+
+		if option == "-v" {
+			fmt.Printf("%d ", cpuguess)
+		}
+
+		if guess != cpuguess {
+			continue
+		}
+
+		if turn == 1 {
+			fmt.Println("You won on the first turn!!! WOWWW")
+		} else {
+			fmt.Println("You won!!!")
+		}
+		return
+	}
+
+	fmt.Println("You lost! :(")
 }

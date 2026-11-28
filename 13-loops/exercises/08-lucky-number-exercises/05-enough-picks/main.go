@@ -8,6 +8,13 @@
 
 package main
 
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Enough Picks
 //
@@ -46,4 +53,45 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	const maxTurns = 5
+
+	args := os.Args
+
+	if len(args) < 2 {
+		fmt.Println("Please provide a value")
+		return
+	}
+
+	guess, err := strconv.Atoi(args[1])
+
+	if err != nil || guess <= 0 {
+		fmt.Println("Please provide a valid integer value larger than 0")
+		return
+	}
+
+	var maxValue int
+
+	if guess < 10 {
+		maxValue = 10
+	} else {
+		maxValue = guess
+	}
+
+	for turn := 1; turn <= maxTurns; turn++ {
+		cpuguess := rand.Intn(maxValue) + 1
+
+		if guess != cpuguess {
+			continue
+		}
+
+		if turn == 1 {
+			fmt.Println("You won on the first turn!!! WOWWW")
+		} else {
+			fmt.Println("You won!!!")
+		}
+		return
+	}
+
+	fmt.Println("You lost! :(")
+
 }

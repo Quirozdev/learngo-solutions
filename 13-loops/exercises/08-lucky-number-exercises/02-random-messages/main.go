@@ -8,6 +8,13 @@
 
 package main
 
+import (
+	"fmt"
+	"math/rand"
+	"os"
+	"strconv"
+)
+
 // ---------------------------------------------------------
 // EXERCISE: Random Messages
 //
@@ -35,4 +42,46 @@ package main
 // ---------------------------------------------------------
 
 func main() {
+	const maxTurns = 5
+
+	args := os.Args
+
+	if len(args) < 2 {
+		fmt.Println("Please provide a value")
+		return
+	}
+
+	guess, err := strconv.Atoi(args[1])
+
+	if err != nil || guess <= 0 {
+		fmt.Println("Please provide a valid integer value larger than 0")
+		return
+	}
+
+	for turn := 1; turn <= maxTurns; turn++ {
+		cpuguess := rand.Intn(guess) + 1
+
+		if guess != cpuguess {
+			continue
+		}
+
+		switch n := rand.Intn(3); n {
+		case 0:
+			fmt.Println("YOU WON")
+		case 1:
+			fmt.Println("YOU'RE AWESOME")
+		default:
+			fmt.Println("YOU ARE A WINNER!")
+		}
+		return
+	}
+
+	switch n := rand.Intn(3); n {
+	case 0:
+		fmt.Println("LOSER!")
+	case 1:
+		fmt.Println("YOU LOST. TRY AGAIN?")
+	default:
+		fmt.Println("YOU DIDN'T GUESSED IT CORRECTLY!")
+	}
 }
